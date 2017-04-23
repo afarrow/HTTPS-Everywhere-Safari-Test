@@ -15,6 +15,7 @@ A few hour's effort to see if HTTPS Everywhere could be ported to Safari. Inspir
 5. Select the "Test-HTTPS-Everywhere.safariextension" folder that is included in this repo
 6. To run, click the install button in the top right-hand corner. It will ask you to confirm and for your password
 7. It should work now. See Notes for what to expect when it's running and Editing Rules for how to edit the rules
+8. Note that you need to repeat the step 6 each time you restart Safari
 
 ## Editing Rules
 * To edit the rewrite rules, simply edit the sites.json file located in the safariextension folder
