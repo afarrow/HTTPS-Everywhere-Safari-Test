@@ -17,7 +17,7 @@ A few hour's effort to see if HTTPS Everywhere could be ported to Safari. Inspir
 
 ### Notes
 * While the script can generate a JSON file with ~75% of HTTPS Everywhere's rewrite rules (~700,000 lines of JSON), Safari seems to only be able to handle small JSON files
-  * I got a "JSON Compilation failed" error for a JSON file generated with 750 HTTPS Everywhere rulesets
+  * I got a "JSON Compilation failed" error for every JSON file generated with >=750 HTTPS Everywhere rulesets
   * 500 rulesets (~13,000 lines) in one file worked so the maximum is somewhere between 500 and 750 rulesets
   * I don't know if you could compile it and distribute a binary that had more than 500 rulesets
 * The rewriting definitely works, it just only seems to work in certain situations
