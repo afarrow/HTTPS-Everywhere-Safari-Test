@@ -30,11 +30,15 @@ A few hour's effort to see if HTTPS Everywhere could be ported to Safari. Inspir
 * The rewriting definitely works, it just only seems to work in certain situations
   * It seems to work if there's a redirect
     * Ex: http://msn.com redirects to http://www.msn.com which seems to trigger an https rewrite
-    * If you go directly to http://www.msn.com, it doesn't seem to triggger an https rewrite
+    * If you type http://www.msn.com in the address bar, it doesn't seem to triggger an https rewrite
   * It seems to work if you refresh the page
+  * It seems to work if you click on a link (rather than type in the URL in the address bar)
   * Once a site has been rewritten once, it seems to rewrite links more readily in the future
     * Ex: After loading msn.com over https, it seems to rewrite future http://www.msn.com to https
     * I don't know how long this effect lasts
+      * After further testing, it seems like this only affects your most recently visited site.
+        * Ex: You visit msn.com and then library.princeton.edu and both triggered rewrites. If you then go back to www.msn.com, it will not automatically rewrite 
+  * **Basically, the only time it doesn't seem to work immediately is when you type in the address and there is no redirect**
 * I just built the Extension using Safari's Extension Builder but Apple also offers the option of building extensions with XCode
   * I don't know if that could get around some of the limitations I've found here
   * A link to Apple's docs about that is in the Useful Links section
