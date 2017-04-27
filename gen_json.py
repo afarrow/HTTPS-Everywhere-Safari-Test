@@ -3,6 +3,7 @@ A simple Python script that generates JSON compatible with Safari's Content
 Blocker from HTTPS Everywhere rulesets (XML files). The script avoids trying
 to parse rulesets that have exclusions or more than one rewrite rule
 """
+#TODO: Fix regex escape so you don't escape stuff that's meant to be regex
 import argparse
 import json
 import os
@@ -35,15 +36,20 @@ def get_targets(file, single_file):
 
         # Don't continue if the file contains an exclusion
         # or if it contains multiple rewrite rules
-        if soup.find('exclusion') is not None or len(soup.find_all('rule')) != 1:
+        if soup.find('exclusion') is not None or len(soup.find_all('rule')) != 1 or 'default_off' in soup.find('ruleset').attrs:
             return
 
         arr = []
         for target in soup.find_all('target'):
-            arr.append(target['host'])
+            if not containsAny(target['host'], '^*+\\()[]$'):
+                #print(target['host'])
+                arr.append(target['host'])
 
     return arr
 
+def containsAny(string, char_set):
+    """Check whether 'str' contains ANY of the chars in 'set'"""
+    return 1 in [c in string for c in char_set]
 
 def parse_dir(dirpath, output, limit):
     """
@@ -128,6 +134,7 @@ def generate_json(targets, output, skipped_files=None, good_files=0):
         num_skipped = len(skipped_files)
         print('%d files skipped (%d%%)' % (len(skipped_files),
                                            (100*(num_skipped/(num_skipped+good_files)))))
+        print('%d targets in the JSON file' % len(targets))
 
 def is_xml_file(file):
     return os.path.splitext(file)[1].lower() == '.xml'
